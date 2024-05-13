@@ -1,6 +1,4 @@
-C:\Users\ksc\RiderProjects\Server\ServerCore\bin\Debug\net8.0\ServerCore.exe
 C:\Users\ksc\RiderProjects\Server\ServerCore\bin\Debug\net8.0\ServerCore.deps.json
-C:\Users\ksc\RiderProjects\Server\ServerCore\bin\Debug\net8.0\ServerCore.runtimeconfig.json
 C:\Users\ksc\RiderProjects\Server\ServerCore\bin\Debug\net8.0\ServerCore.dll
 C:\Users\ksc\RiderProjects\Server\ServerCore\bin\Debug\net8.0\ServerCore.pdb
 C:\Users\ksc\RiderProjects\Server\ServerCore\obj\Debug\net8.0\ServerCore.GeneratedMSBuildEditorConfig.editorconfig
@@ -10,5 +8,5 @@ C:\Users\ksc\RiderProjects\Server\ServerCore\obj\Debug\net8.0\ServerCore.csproj.
 C:\Users\ksc\RiderProjects\Server\ServerCore\obj\Debug\net8.0\ServerCore.dll
 C:\Users\ksc\RiderProjects\Server\ServerCore\obj\Debug\net8.0\refint\ServerCore.dll
 C:\Users\ksc\RiderProjects\Server\ServerCore\obj\Debug\net8.0\ServerCore.pdb
-C:\Users\ksc\RiderProjects\Server\ServerCore\obj\Debug\net8.0\ServerCore.genruntimeconfig.cache
 C:\Users\ksc\RiderProjects\Server\ServerCore\obj\Debug\net8.0\ref\ServerCore.dll
+C:\Users\ksc\RiderProjects\Server\ServerCore\obj\Debug\net8.0\ServerCore.sourcelink.json
