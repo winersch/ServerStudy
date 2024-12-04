@@ -2,7 +2,7 @@
 using System.Text;
 using ServerCore;
 
-namespace DummyClient;
+namespace Server;
 
 abstract class Packet {
     public ushort size;
@@ -12,11 +12,16 @@ abstract class Packet {
     public abstract void Read(ArraySegment<byte> segment);
 }
 
-public class ServerSession : PacketSession {
+public class ClientSession : PacketSession {
+   
+    public int SessionId { get; set; }
+    public GameRoom Room { get; set; }
     public override void OnConnected(EndPoint endPoint) {
         Console.WriteLine($"OnConnected : {endPoint}");
-       
+        
+        Program.Room.Push( () => Program.Room.Enter(this));
     }
+
 
     public override void OnRecvPacket(ArraySegment<byte> buffer) {
         PacketManager.Instance.OnRecvPacket(this, buffer);
@@ -27,6 +32,12 @@ public class ServerSession : PacketSession {
     }
 
     public override void OnDisconnected(EndPoint endPoint) {
+        SessionManager.Instance.Remove(this);
+        if (Room != null) {
+            GameRoom room = Room;
+            room.Push( () => room.Leave(this));
+            Room = null;
+        }
         Console.WriteLine($"OnDisconnected :{endPoint}");
     }
 }

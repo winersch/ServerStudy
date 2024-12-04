@@ -17,16 +17,19 @@ namespace DummyClient {
             IPEndPoint endPoint = new IPEndPoint(ipAddress, 7777);
 
             Connector connector = new Connector();
-            connector.Connect(endPoint, () => new ServerSession());
+            connector.Connect(endPoint, () => {
+                return SessionManager.Instance.Generate();
+            }, 50);
             
             while (true) {
                 try {
+                    SessionManager.Instance.SendForEach();
                 }
                 catch (Exception e) {
                     Console.WriteLine(e.ToString());
                     throw;
                 }
-                Thread.Sleep(100);
+                Thread.Sleep(250);
             }
         }
     }

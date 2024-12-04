@@ -16,4 +16,4 @@ C:\Users\ksc\RiderProjects\Server\Server\bin\Debug\net8.0\ServerCore.dll
 C:\Users\ksc\RiderProjects\Server\Server\bin\Debug\net8.0\ServerCore.pdb
 C:\Users\ksc\RiderProjects\Server\Server\obj\Debug\net8.0\Server.csproj.AssemblyReference.cache
 C:\Users\ksc\RiderProjects\Server\Server\obj\Debug\net8.0\Server.sourcelink.json
-C:\Users\ksc\RiderProjects\Server\Server\obj\Debug\net8.0\Server.csproj.CopyComplete
+C:\Users\ksc\RiderProjects\Server\Server\obj\Debug\net8.0\Server.csproj.Up2Date

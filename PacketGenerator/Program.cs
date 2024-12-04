@@ -7,13 +7,25 @@ namespace PacketGenerator;
 
 class Program {
     private static string genPackets;
+    static ushort packetId;
+    private static string packetEnums;
 
+    private static string clientRegister;
+    private static string serverRegister;
     static void Main(string[] args) {
+        
+        string pdlPath = "../PDL.xml";
+        
         XmlReaderSettings settings = new XmlReaderSettings {
             IgnoreComments = true,
             IgnoreWhitespace = true,
         };
-        using (XmlReader r = XmlReader.Create("PDL.xml", settings)) {
+
+        if (args.Length >= 1) {
+            pdlPath = args[0];
+        }
+        
+        using (XmlReader r = XmlReader.Create(pdlPath, settings)) {
             r.MoveToContent();
 
             while (r.Read()) {
@@ -24,7 +36,13 @@ class Program {
                 Console.WriteLine(r.Name + " " + r["name"]);
             }
 
-            File.WriteAllText("GenPacket.cs", genPackets);
+            string fileText = string.Format(PacketFormat.fileFormat, packetEnums, genPackets);
+            File.WriteAllText("GenPackets.cs", fileText);
+            string clientmanagerText = string.Format(PacketFormat.managerFormat, clientRegister);
+            File.WriteAllText("ClientPacketManager.cs", clientmanagerText);
+            string servermanagerText = string.Format(PacketFormat.managerFormat, serverRegister);
+            File.WriteAllText("ServerPacketManager.cs", servermanagerText);
+            
         }
     }
 
@@ -47,6 +65,12 @@ class Program {
 
         Tuple<string, string, string> t = ParseMembers(r);
         genPackets += string.Format(PacketFormat.packetFormat, packetName, t.Item1, t.Item2, t.Item3);
+        packetEnums += string.Format(PacketFormat.packetEnumFormat, packetName, ++packetId) + "\n\t";
+        if (packetName.StartsWith("S_") || packetName.StartsWith("s_")) {
+            clientRegister += string.Format(PacketFormat.managerRegisterFormat, packetName) + "\n";
+        } else {
+            serverRegister += string.Format(PacketFormat.managerRegisterFormat, packetName) + "\n";
+        }
     }
 
     // {1} 멤버 변수들
@@ -81,10 +105,16 @@ class Program {
             if (string.IsNullOrEmpty(writeCode) == false) {
                 writeCode += Environment.NewLine;
             }
+            
             string memberType = r.Name.ToLower();
             switch (memberType) {
-                case "bool":
                 case "byte":
+                case "sbyte":
+                    memberCode += string.Format(PacketFormat.memberFormat, memberType, memberName);
+                    readCode += string.Format(PacketFormat.readByteFormat, memberName, memberType);
+                    writeCode += string.Format(PacketFormat.writeByteFormat, memberName, memberType);
+                    break;
+                case "bool":
                 case "short":
                 case "ushort":
                 case "int":
